@@ -1,0 +1,25 @@
+# Node / React
+node_modules/
+build/
+dist/
+
+# Java / Spring Boot
+target/
+*.class
+*.jar
+*.war
+
+# Banco de dados local
+*.sql
+*.db
+
+# Variáveis de ambiente
+.env
+
+# Logs
+*.log
+
+# Sistema / IDE
+.DS_Store
+.vscode/
+.idea/
