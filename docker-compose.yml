@@ -1,0 +1,61 @@
+version: '3.9'
+
+services:
+  db:
+    image: mysql:8.1
+    container_name: movu_db
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: movu_db
+      MYSQL_USER: movu_user
+      MYSQL_PASSWORD: movu_pass
+    ports:
+      - "3306:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - movu_net
+
+  backend:
+    build: ./backend
+    container_name: movu_backend
+    ports:
+      - "8080:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      MYSQL_DATABASE: movu_db
+      MYSQL_USER: movu_user
+      MYSQL_PASSWORD: movu_pass
+      JWT_SECRET: troque_por_uma_chave_secreta
+    networks:
+      - movu_net
+
+  frontend:
+    build:
+      context: ./movu_frontend
+      dockerfile: Dockerfile
+    container_name: movu_frontend
+    depends_on:
+      - backend
+    environment:
+      VITE_API_URL: http://backend:8080
+    ports:
+      - "3000:5173"
+    networks:
+      - movu_net
+    # volumes:
+    #   - ./movu_frontend:/app
+
+volumes:
+  db_data:
+
+networks:
+  movu_net:
+    driver: bridge
