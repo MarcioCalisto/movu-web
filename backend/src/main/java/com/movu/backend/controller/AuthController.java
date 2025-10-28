@@ -18,8 +18,10 @@ import com.movu.backend.security.JwtUtil;
 @RequestMapping("/api/auth")
 public class AuthController {
 
-    @Autowired private UserRepository userRepo;
-    @Autowired private JwtUtil jwtUtil;
+    @Autowired
+    private UserRepository userRepo;
+    @Autowired
+    private JwtUtil jwtUtil;
 
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody Map<String, String> body) {
@@ -37,9 +39,9 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody Map<String, String> body) {
-        String email = body.get("email");
-        String password = body.get("password");
+    public ResponseEntity<?> login(@RequestBody Map<String, String> credentials) {
+        String email = credentials.get("email");
+        String password = credentials.get("password");
         User user = userRepo.findByEmail(email).orElse(null);
         if (user == null || !user.getPassword().equals(password)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciais inválidas");
