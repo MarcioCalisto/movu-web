@@ -17,4 +17,4 @@ spring:
     locations: classpath:db/migration
 
 jwt:
-  secret: ${JWT_SECRET:mysecretkey}
+  secret: ${JWT_SECRET:s3Kj28h1Qy+n8A6oXxk1ZfD9y0CZuzMZsDl0TnF1oFWkT4iY0X5p8iX2bY9g9tQ=}

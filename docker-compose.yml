@@ -33,7 +33,8 @@ services:
       MYSQL_DATABASE: movu_db
       MYSQL_USER: movu_user
       MYSQL_PASSWORD: movu_pass
-      JWT_SECRET: troque_por_uma_chave_secreta
+      JWT_SECRET: s3Kj28h1Qy+n8A6oXxk1ZfD9y0CZuzMZsDl0TnF1oFWkT4iY0X5p8iX2bY9g9tQ=
+
     networks:
       - movu_net
 
