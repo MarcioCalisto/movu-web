@@ -14,9 +14,14 @@ public class CorsConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("http://localhost:5173")
+                        .allowedOrigins(
+                            "http://localhost:5173",  // Frontend local
+                            "http://127.0.0.1:5173"   // Alternativo (alguns browsers usam este)
+                        )
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
-                        .allowedHeaders("*");
+                        .allowedHeaders("*")
+                        .exposedHeaders("Authorization") // permite expor o token JWT se houver
+                        .allowCredentials(true); // importante se o frontend usa cookies ou JWT
             }
         };
     }
