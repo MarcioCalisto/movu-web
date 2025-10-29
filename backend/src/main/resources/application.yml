@@ -10,11 +10,13 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
-      ddl-auto: validate
+      ddl-auto: none
     show-sql: true
   flyway:
     enabled: true
     locations: classpath:db/migration
+    baseline-on-migrate: true
+    validate-on-migrate: true
 
 jwt:
   secret: ${JWT_SECRET:s3Kj28h1Qy+n8A6oXxk1ZfD9y0CZuzMZsDl0TnF1oFWkT4iY0X5p8iX2bY9g9tQ=}
