@@ -1,5 +1,6 @@
 server:
-  port: ${APP_PORT_BACKEND:8080}
+  port: 8080
+  address: 0.0.0.0
 
 # O hostname db aqui é o nome do container MySQL no docker-compose.yml
 spring:
